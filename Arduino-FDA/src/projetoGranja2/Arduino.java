@@ -7,7 +7,7 @@ public class Arduino {
 	
 	public Arduino() {
 
-		controlePorta = new ControlePorta("COM5", 9600);
+		controlePorta = new ControlePorta("COM7", 9600);
 
 	}
 	
