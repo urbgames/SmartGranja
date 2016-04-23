@@ -27,6 +27,7 @@ public class ControlePorta implements SerialPortEventListener {
 
 		sensoriamentoDAO = new SensoriamentoDAO();
 
+		
 		this.portaCOM = portaCOM;
 		this.taxa = taxa;	
 		
