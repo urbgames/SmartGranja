@@ -28,9 +28,7 @@ public class ControlePorta implements SerialPortEventListener {
 		sensoriamentoDAO = new SensoriamentoDAO();
 
 		this.portaCOM = portaCOM;
-		this.taxa = taxa;
-		
-		Thread thread = new Thread();
+		this.taxa = taxa;	
 		
 		this.initialize();
 	}
