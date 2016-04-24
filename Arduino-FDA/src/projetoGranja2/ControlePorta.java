@@ -28,6 +28,7 @@ public class ControlePorta implements SerialPortEventListener {
 		this.portaCOM = portaCOM;
 		this.taxa = taxa;
 		this.initialize();
+		this.controlePersistencia = new ControlePersistencia();
 	}
 
 	public void initialize() {
@@ -87,6 +88,7 @@ public class ControlePorta implements SerialPortEventListener {
 			try {
 				
 				String inputLine = input.readLine();
+				System.out.println(inputLine);
 				controlePersistencia.persistirDados(inputLine);		
 				
 			} catch (Exception e) {

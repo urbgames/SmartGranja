@@ -10,6 +10,8 @@ public class Tela extends JFrame {
 		
 		arduino = new Arduino();
 		
+		//testando
+		
 		setVisible(true);
 		setLocationRelativeTo(null);
 		setSize(400, 300);
