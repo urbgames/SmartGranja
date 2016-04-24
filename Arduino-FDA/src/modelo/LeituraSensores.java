@@ -16,5 +16,29 @@ public class LeituraSensores {
 	public float umidade;
 	public float luminosidade;
 	public Date instante;
+	public float getTemperatura() {
+		return temperatura;
+	}
+	public void setTemperatura(float temperatura) {
+		this.temperatura = temperatura;
+	}
+	public float getUmidade() {
+		return umidade;
+	}
+	public void setUmidade(float umidade) {
+		this.umidade = umidade;
+	}
+	public float getLuminosidade() {
+		return luminosidade;
+	}
+	public void setLuminosidade(float luminosidade) {
+		this.luminosidade = luminosidade;
+	}
+	public Date getInstante() {
+		return instante;
+	}
+	public void setInstante(Date instante) {
+		this.instante = instante;
+	}
 		
 }
