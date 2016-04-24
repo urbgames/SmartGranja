@@ -21,11 +21,9 @@ public class ControlePorta implements SerialPortEventListener {
 	private int taxa;
 	private BufferedReader input;
 	private SerialPort serialPort;
-	private SensoriamentoDAO sensoriamentoDAO;
+	private ControlePersistencia controlePersistencia;
 
 	public ControlePorta(String portaCOM, int taxa) {
-
-		sensoriamentoDAO = new SensoriamentoDAO();
 
 		this.portaCOM = portaCOM;
 		this.taxa = taxa;
@@ -89,21 +87,7 @@ public class ControlePorta implements SerialPortEventListener {
 			try {
 				
 				String inputLine = input.readLine();
-				String [] entradas = inputLine.split("/");
-				
-				Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-					
-				SensoriamentoVO sensoriamentoVO = new SensoriamentoVO();
-				sensoriamentoVO.umidade= Float.parseFloat(entradas[0]);
-				sensoriamentoVO.temperatura= Float.parseFloat(entradas[1]);
-				sensoriamentoVO.luminosidade= Float.parseFloat(entradas[2]);
-				sensoriamentoVO.dataFinalizacao = timestamp;
-								
-				sensoriamentoDAO.inserirSensoriamento(sensoriamentoVO);
-				
-				System.out.print("Umidade: " + entradas[0] + "\t");
-				System.out.print("Temperatura: " + entradas[1] + "\t");
-				System.out.println("Luminosidade: " + entradas[2]);
+				controlePersistencia.persistirDados(inputLine);		
 				
 			} catch (Exception e) {
 				System.err.println(e.toString());
