@@ -8,11 +8,6 @@ import gnu.io.SerialPortEventListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class ControlePorta implements SerialPortEventListener {
 
@@ -25,10 +20,11 @@ public class ControlePorta implements SerialPortEventListener {
 
 	public ControlePorta(String portaCOM, int taxa) {
 
+		this.controlePersistencia = new ControlePersistencia();
 		this.portaCOM = portaCOM;
 		this.taxa = taxa;
 		this.initialize();
-		this.controlePersistencia = new ControlePersistencia();
+		
 	}
 
 	public void initialize() {
@@ -88,7 +84,6 @@ public class ControlePorta implements SerialPortEventListener {
 			try {
 				
 				String inputLine = input.readLine();
-				System.out.println(inputLine);
 				controlePersistencia.persistirDados(inputLine);		
 				
 			} catch (Exception e) {

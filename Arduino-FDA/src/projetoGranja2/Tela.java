@@ -7,7 +7,7 @@ public class Tela extends JFrame {
 	Arduino arduino;
 
 	public Tela() {
-		
+
 		arduino = new Arduino();
 		
 		//testando
