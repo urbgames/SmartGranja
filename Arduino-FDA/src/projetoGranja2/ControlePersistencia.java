@@ -16,8 +16,8 @@ public class ControlePersistencia {
 	
 	public ControlePersistencia(Tela tela) {
 		
-		this.tela = tela;
 		this.leituraDAO = new LeituraSensoresDAO();
+		this.tela = tela;
 		this.controlePorta = new ControlePorta("COM3", 9600, this);
 		
 	}
@@ -41,7 +41,7 @@ public class ControlePersistencia {
 			leitura.setInstante(time);
 		
 			//Mostra os resultados na tela
-			tela.atualizarTabelaResultados(leitura);
+			tela.atualizarResultados(leitura);
 			
 			System.out.print("Umidade: " + entradas[0] + "\t");
 			System.out.print("Temperatura: " + entradas[1] + "\t");

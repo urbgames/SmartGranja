@@ -11,11 +11,12 @@ public class LeituraSensores {
 	
 	@Id
 	@GeneratedValue
-	public int id;
-	public float temperatura;
-	public float umidade;
-	public float luminosidade;
-	public Date instante;
+	private int id;
+	private float temperatura;
+	private float umidade;
+	private float luminosidade;
+	private Date instante;
+	
 	public float getTemperatura() {
 		return temperatura;
 	}
