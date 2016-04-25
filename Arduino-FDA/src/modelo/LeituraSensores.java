@@ -40,5 +40,8 @@ public class LeituraSensores {
 	public void setInstante(Date instante) {
 		this.instante = instante;
 	}
+	public int getId() {
+		return id;
+	}
 		
 }

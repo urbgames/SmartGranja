@@ -11,10 +11,15 @@ public class ControlePersistencia {
 	private int quantidade = 0;
 	private int delay = 10; //Considerando o sleep do arduino de 1 seg o delay = 1 minuto
 	private LeituraSensoresDAO leituraDAO;
+	private Tela tela;
+	private ControlePorta controlePorta;
 	
-	public ControlePersistencia() {
+	public ControlePersistencia(Tela tela) {
 		
-		leituraDAO = new LeituraSensoresDAO();
+		this.tela = tela;
+		this.leituraDAO = new LeituraSensoresDAO();
+		this.controlePorta = new ControlePorta("COM3", 9600, this);
+		
 	}
 	
 	public void persistirDados(String inputLine) {
@@ -35,6 +40,9 @@ public class ControlePersistencia {
 			leitura.setLuminosidade(Float.parseFloat(entradas[2]));
 			leitura.setInstante(time);
 		
+			//Mostra os resultados na tela
+			tela.atualizarTabelaResultados(leitura);
+			
 			System.out.print("Umidade: " + entradas[0] + "\t");
 			System.out.print("Temperatura: " + entradas[1] + "\t");
 			System.out.println("Luminosidade: " + entradas[2]);

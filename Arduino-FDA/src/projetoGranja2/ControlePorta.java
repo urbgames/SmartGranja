@@ -18,13 +18,12 @@ public class ControlePorta implements SerialPortEventListener {
 	private SerialPort serialPort;
 	private ControlePersistencia controlePersistencia;
 
-	public ControlePorta(String portaCOM, int taxa) {
+	public ControlePorta(String portaCOM, int taxa, ControlePersistencia contPerst) {
 
-		this.controlePersistencia = new ControlePersistencia();
+		this.controlePersistencia = contPerst;
 		this.portaCOM = portaCOM;
 		this.taxa = taxa;
 		this.initialize();
-		
 	}
 
 	public void initialize() {
