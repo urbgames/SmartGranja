@@ -1,6 +1,8 @@
 package projetoGranja2;
 
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 
 import modelo.LeituraSensores;
 import modelo.LeituraSensoresDAO;
@@ -8,21 +10,22 @@ import modelo.RelatorioDiario;
 import modelo.RelatorioDiarioDAO;
 
 
-public class ControlePersistencia {
+public class ControlePersistencia implements Observer {
 	
 	private int quantidade = 0;
 	private int delay = 10; //Considerando o sleep do arduino de 1 seg o delay = 1 minuto
 	private LeituraSensoresDAO leituraDAO;
 	private RelatorioDiarioDAO relatorioDAO; 
 	private Tela tela;
-	private ControlePorta controlePorta;
+	private ArduinoDAO controlePorta;
 	
 	public ControlePersistencia(Tela tela) {
 		
 		this.leituraDAO = new LeituraSensoresDAO();
 		this.relatorioDAO = new RelatorioDiarioDAO();
 		this.tela = tela;
-		this.controlePorta = new ControlePorta("COM3", 9600, this);
+		this.controlePorta = new ArduinoDAO("COM5", 9600, this);
+		this.controlePorta.addObserver(this);
 		
 	}
 	
@@ -59,6 +62,11 @@ public class ControlePersistencia {
 			
 		
 	}
+	
+	public void update(Observable arg0, Object arg1) {
+		persistirDados(controlePorta.getInputLine());
+		System.out.println(controlePorta.getInputLine());
+	}
 
 	public int getDelay() {
 		return delay;
@@ -67,5 +75,7 @@ public class ControlePersistencia {
 	public void setDelay(int delay) {
 		this.delay = delay;
 	}
+
+	
 
 }

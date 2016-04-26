@@ -8,8 +8,9 @@ import gnu.io.SerialPortEventListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Observable;
 
-public class ControlePorta implements SerialPortEventListener {
+public class ArduinoDAO extends Observable implements SerialPortEventListener {
 
 	private OutputStream serialOut;
 	private String portaCOM;
@@ -17,8 +18,9 @@ public class ControlePorta implements SerialPortEventListener {
 	private BufferedReader input;
 	private SerialPort serialPort;
 	private ControlePersistencia controlePersistencia;
+	private String inputLine;
 
-	public ControlePorta(String portaCOM, int taxa, ControlePersistencia contPerst) {
+	public ArduinoDAO(String portaCOM, int taxa, ControlePersistencia contPerst) {
 
 		this.controlePersistencia = contPerst;
 		this.portaCOM = portaCOM;
@@ -81,13 +83,22 @@ public class ControlePorta implements SerialPortEventListener {
 	public void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
-				
-				String inputLine = input.readLine();
-				controlePersistencia.persistirDados(inputLine);		
-				
+
+				inputLine = input.readLine();
+				setChanged();
+				notifyObservers();
+
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
 		}
+	}
+
+	public String getInputLine() {
+		return inputLine;
+	}
+
+	public void setInputLine(String inputLine) {
+		this.inputLine = inputLine;
 	}
 }
