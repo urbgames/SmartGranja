@@ -18,7 +18,7 @@ import control.ControlePersistencia;
 
 public class TelaPrincipal extends JFrame {
 
-	private ControlePersistencia controlePersistencia;
+	//private ControlePersistencia controlePersistencia;
 	private JLabel lbTemperatura, lbUmidade, lbLuminosidade;
 	private JLabel lbValorTemp, lbValorUmid, lbValorLum;
 	private JPanel painel1, painel2;
@@ -72,7 +72,7 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-				controlePersistencia = new ControlePersistencia(TelaPrincipal.this);
+				new ControlePersistencia(TelaPrincipal.this);
 				
 				
 			}
@@ -84,11 +84,12 @@ public class TelaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Inserir um relatorio da BD apenas p/ testar as inserções da LeituraSensores
-				RelatorioDiario relatorio = new RelatorioDiario();
+				/*RelatorioDiario relatorio = new RelatorioDiario();
 				RelatorioDiarioDAO relDAO = new RelatorioDiarioDAO();
 				relatorio.setData("10/10");
 				relatorio.setMortalidade(12);
-				relDAO.inserirRelatorio(relatorio);
+				relDAO.inserirRelatorio(relatorio);*/
+				new TelaMortalidade().setVisible(true);
 				
 			}
 		});
