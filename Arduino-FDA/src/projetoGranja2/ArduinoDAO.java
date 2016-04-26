@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-public class ControlePorta implements SerialPortEventListener {
+public class ArduinoDAO implements SerialPortEventListener {
 
 	private OutputStream serialOut;
 	private String portaCOM;
@@ -17,8 +17,9 @@ public class ControlePorta implements SerialPortEventListener {
 	private BufferedReader input;
 	private SerialPort serialPort;
 	private ControlePersistencia controlePersistencia;
+	protected String inputLine;
 
-	public ControlePorta(String portaCOM, int taxa, ControlePersistencia contPerst) {
+	public ArduinoDAO(String portaCOM, int taxa, ControlePersistencia contPerst) {
 
 		this.controlePersistencia = contPerst;
 		this.portaCOM = portaCOM;
@@ -82,8 +83,12 @@ public class ControlePorta implements SerialPortEventListener {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				
-				String inputLine = input.readLine();
-				controlePersistencia.persistirDados(inputLine);		
+				inputLine = input.readLine();
+				
+				// Controle não pode ser chamado pelo DAO, o inputLine deve retornar os dados ao controle
+				// a facilidade aqui é que a persistencia é chamada assim q o evento dispara..
+				
+				//controlePersistencia.persistirDados(inputLine);		
 				
 			} catch (Exception e) {
 				System.err.println(e.toString());

@@ -15,22 +15,26 @@ public class ControlePersistencia {
 	private LeituraSensoresDAO leituraDAO;
 	private RelatorioDiarioDAO relatorioDAO; 
 	private Tela tela;
-	private ControlePorta controlePorta;
+	private ArduinoDAO arduinoDAO;
 	
 	public ControlePersistencia(Tela tela) {
 		
 		this.leituraDAO = new LeituraSensoresDAO();
 		this.relatorioDAO = new RelatorioDiarioDAO();
+		this.arduinoDAO = new ArduinoDAO("COM3", 9600, this);
 		this.tela = tela;
-		this.controlePorta = new ControlePorta("COM3", 9600, this);
+		
+		// é preciso chama-lo várias vezes
+		persistirDados();
 		
 	}
 	
-	public void persistirDados(String inputLine) {
+	// Como chamar o persistirDados de tempos em tempos já que não é chamado mais no método SerialEvent incessantemente?
+	private void persistirDados() {
 		
 		quantidade++;
 		System.out.println(quantidade);
-		String [] entradas = inputLine.split("/");
+		String [] entradas = arduinoDAO.inputLine.split("/");
 		
 		
 		if(quantidade >= delay) {
