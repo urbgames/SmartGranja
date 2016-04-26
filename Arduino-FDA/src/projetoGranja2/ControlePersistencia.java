@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
+
 import modelo.LeituraSensores;
 import modelo.LeituraSensoresDAO;
 import modelo.RelatorioDiario;
