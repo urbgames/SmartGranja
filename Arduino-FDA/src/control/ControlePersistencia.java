@@ -1,14 +1,18 @@
-package projetoGranja2;
+package control;
 
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
 
-import modelo.LeituraSensores;
-import modelo.LeituraSensoresDAO;
-import modelo.RelatorioDiario;
-import modelo.RelatorioDiarioDAO;
+import model.LeituraSensores;
+import model.LeituraSensoresDAO;
+import model.RelatorioDiario;
+import model.RelatorioDiarioDAO;
+import model.ArduinoDAO;
+import view.Tela;
+
+
 
 
 public class ControlePersistencia implements Observer {

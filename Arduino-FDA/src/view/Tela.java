@@ -1,8 +1,5 @@
-package projetoGranja2;
+package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -13,14 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.Border;
-import javax.swing.table.DefaultTableModel;
 
-import modelo.LeituraSensores;
-import modelo.RelatorioDiario;
-import modelo.RelatorioDiarioDAO;
+import model.LeituraSensores;
+import model.RelatorioDiario;
+import model.RelatorioDiarioDAO;
+import control.ControlePersistencia;
 
 public class Tela extends JFrame {
 

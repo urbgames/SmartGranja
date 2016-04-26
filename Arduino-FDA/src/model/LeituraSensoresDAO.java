@@ -1,33 +1,27 @@
-package modelo;
+package model;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class RelatorioDiarioDAO {
+public class LeituraSensoresDAO {
 
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("sensoriamento");
 	EntityManager manager = factory.createEntityManager();
-
-
-	public void inserirRelatorio(RelatorioDiario relatorio) {
-
+	
+	public void inserirLeitura(LeituraSensores leitura) {
+		
 		manager.getTransaction().begin();
-		manager.persist(relatorio);
+		manager.persist(leitura);
 		manager.getTransaction().commit();
+		
 	}
 
-	public RelatorioDiario getById(int id) {
-
-		return manager.find(RelatorioDiario.class, id);
-	}
-
+	
 	public void finalizar(){
-
+		
 		manager.close();
 		factory.close();
-
+		
 	}
-
-
 }
