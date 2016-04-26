@@ -19,12 +19,10 @@ public class ArduinoDAO extends Observable implements SerialPortEventListener {
 	private int taxa;
 	private BufferedReader input;
 	private SerialPort serialPort;
-	private ControlePersistencia controlePersistencia;
 	private String inputLine;
 
-	public ArduinoDAO(String portaCOM, int taxa, ControlePersistencia contPerst) {
+	public ArduinoDAO(String portaCOM, int taxa) {
 
-		this.controlePersistencia = contPerst;
 		this.portaCOM = portaCOM;
 		this.taxa = taxa;
 		this.initialize();

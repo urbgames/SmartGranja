@@ -1,8 +1,13 @@
 package model;
 
+import java.util.List;
+import java.util.Vector;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+
 
 public class RelatorioDiarioDAO {
 
@@ -20,6 +25,19 @@ public class RelatorioDiarioDAO {
 	public RelatorioDiario getById(int id) {
 
 		return manager.find(RelatorioDiario.class, id);
+	}
+
+	public Vector listarDatas() {
+		
+		Query query = manager.createQuery("select data from relatoriodiario");
+		List<RelatorioDiario> lista =  query.getResultList();
+		Vector<String> vectorDatas = new Vector<String>();
+
+		for (RelatorioDiario relatorio : lista) {
+			vectorDatas.addElement(relatorio.getData());			
+		}
+
+		return vectorDatas;
 	}
 
 	public void finalizar(){

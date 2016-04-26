@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+
 public class LeituraSensoresDAO {
 
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("sensoriamento");
@@ -16,7 +17,6 @@ public class LeituraSensoresDAO {
 		manager.getTransaction().commit();
 		
 	}
-
 	
 	public void finalizar(){
 		

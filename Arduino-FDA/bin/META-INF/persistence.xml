@@ -10,8 +10,8 @@
    <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
    <!-- entidade mapeada -->
-   <class>projetoGranja2.LeituraSensores</class>
-   <class>projetoGranja2.RelatorioDiario</class>
+   <class>model.LeituraSensores</class>
+   <class>model.RelatorioDiario</class>
 
    <properties>
   <!-- dados da conexao -->

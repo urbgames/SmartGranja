@@ -10,27 +10,24 @@ import model.LeituraSensoresDAO;
 import model.RelatorioDiario;
 import model.RelatorioDiarioDAO;
 import model.ArduinoDAO;
-import view.Tela;
-
-
-
+import view.TelaPrincipal;
 
 public class ControlePersistencia implements Observer {
 	
 	private int quantidade = 0;
-	private int delay = 10; //Considerando o sleep do arduino de 1 seg o delay = 1 minuto
+	private int delay = 10; //Considerando o sleep do arduino de 1 seg o delay = 10 seg
 	private LeituraSensoresDAO leituraDAO;
 	private RelatorioDiarioDAO relatorioDAO; 
-	private Tela tela;
-	private ArduinoDAO controlePorta;
+	private TelaPrincipal tela;
+	private ArduinoDAO arduinoDAO;
 	
-	public ControlePersistencia(Tela tela) {
+	public ControlePersistencia(TelaPrincipal tela) {
 		
 		this.leituraDAO = new LeituraSensoresDAO();
 		this.relatorioDAO = new RelatorioDiarioDAO();
 		this.tela = tela;
-		this.controlePorta = new ArduinoDAO("COM5", 9600, this);
-		this.controlePorta.addObserver(this);
+		this.arduinoDAO = new ArduinoDAO("COM3", 9600);
+		this.arduinoDAO.addObserver(this);
 		
 	}
 	
@@ -57,20 +54,20 @@ public class ControlePersistencia implements Observer {
 			//Mostra os resultados na tela
 			tela.atualizarResultados(leitura);
 			
+			leituraDAO.inserirLeitura(leitura);
+			quantidade = 0;
+			
 			System.out.print("Umidade: " + entradas[0] + "\t");
 			System.out.print("Temperatura: " + entradas[1] + "\t");
 			System.out.println("Luminosidade: " + entradas[2]);
-			
-			leituraDAO.inserirLeitura(leitura);
-			quantidade = 0;
 		}
 			
 		
 	}
 	
 	public void update(Observable arg0, Object arg1) {
-		persistirDados(controlePorta.getInputLine());
-		System.out.println(controlePorta.getInputLine());
+		persistirDados(arduinoDAO.getInputLine());
+		
 	}
 
 	public int getDelay() {

@@ -16,17 +16,15 @@ import model.RelatorioDiario;
 import model.RelatorioDiarioDAO;
 import control.ControlePersistencia;
 
-public class Tela extends JFrame {
+public class TelaPrincipal extends JFrame {
 
 	private ControlePersistencia controlePersistencia;
 	private JLabel lbTemperatura, lbUmidade, lbLuminosidade;
 	private JLabel lbValorTemp, lbValorUmid, lbValorLum;
 	private JPanel painel1, painel2;
 	private JButton jbIniciarSensoriamento, jbConfigurarInsercao, jbInserirMortalidade;
-	private Tela tela;
 
-
-	public Tela() {
+	public TelaPrincipal() {
 
 		super("MONITORAMENTO DA GRANJA");
 		setLayout(new FlowLayout());
@@ -34,7 +32,6 @@ public class Tela extends JFrame {
 		setLocationRelativeTo(null);
 		setSize(500, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tela = this;
 		
 		painel1 = new JPanel(new GridLayout(2, 3, 50, 0));
 		painel2 = new JPanel(new FlowLayout(0, 10, 30));
@@ -75,7 +72,7 @@ public class Tela extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-				controlePersistencia = new ControlePersistencia(tela);
+				controlePersistencia = new ControlePersistencia(TelaPrincipal.this);
 				
 				
 			}
@@ -107,7 +104,7 @@ public class Tela extends JFrame {
 	
 
 	public static void main(String[] args) {
-		new Tela();
+		new TelaPrincipal();
 	}
 
 }
