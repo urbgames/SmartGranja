@@ -1,9 +1,12 @@
 package modelo;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class LeituraSensores {
@@ -16,7 +19,20 @@ public class LeituraSensores {
 	private float umidade;
 	private float luminosidade;
 	private Date instante;
+	@ManyToOne
+	@JoinColumn(name= "relatorio_id")
+	private RelatorioDiario relatorio;
 	
+	
+	public RelatorioDiario getRelatorio() {
+		return relatorio;
+	}
+	public void setRelatorio(RelatorioDiario relatorio) {
+		this.relatorio = relatorio;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public float getTemperatura() {
 		return temperatura;
 	}

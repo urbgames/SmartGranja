@@ -19,6 +19,8 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.LeituraSensores;
+import modelo.RelatorioDiario;
+import modelo.RelatorioDiarioDAO;
 
 public class Tela extends JFrame {
 
@@ -78,11 +80,27 @@ public class Tela extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
 				controlePersistencia = new ControlePersistencia(tela);
+				
 				
 			}
 		});
 		
+		jbInserirMortalidade.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				//Inserir um relatorio da BD apenas p/ testar as inserções da LeituraSensores
+				RelatorioDiario relatorio = new RelatorioDiario();
+				RelatorioDiarioDAO relDAO = new RelatorioDiarioDAO();
+				relatorio.setData("10/10");
+				relatorio.setMortalidade(12);
+				relDAO.inserirRelatorio(relatorio);
+				
+			}
+		});
 		
 	}
 	
