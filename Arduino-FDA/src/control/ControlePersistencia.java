@@ -16,16 +16,15 @@ public class ControlePersistencia implements Observer {
 	
 	private int quantidade = 0;
 	private int delay = 10; //Considerando o sleep do arduino de 1 seg o delay = 10 seg
+	private TelaPrincipal tela;
 	private LeituraSensoresDAO leituraDAO;
 	private RelatorioDiarioDAO relatorioDAO; 
-	private TelaPrincipal tela;
 	private ArduinoDAO arduinoDAO;
-	private LeituraSensores leitura;
+
 	
 	public ControlePersistencia(TelaPrincipal tela) {
 		
 		this.tela = tela;
-		this.leitura = new LeituraSensores();
 		this.leituraDAO = new LeituraSensoresDAO();
 		this.relatorioDAO = new RelatorioDiarioDAO();
 		this.arduinoDAO = new ArduinoDAO("COM3", 9600);
@@ -37,6 +36,7 @@ public class ControlePersistencia implements Observer {
 		quantidade++;
 		System.out.println(quantidade);
 		String [] entradas = inputLine.split("/");
+		LeituraSensores leitura = new LeituraSensores();
 		
 		leitura.setUmidade(Float.parseFloat(entradas[0]));
 		leitura.setTemperatura(Float.parseFloat(entradas[1]));
@@ -46,9 +46,10 @@ public class ControlePersistencia implements Observer {
 		
 		if(quantidade >= delay) {
 			
-			//Preenche o restante dos dados de "leitura" necessários para a persistencia no BD
 			RelatorioDiario relatorio = relatorioDAO.getById(1);
 			Date time = new Date(System.currentTimeMillis());
+			
+			//Preenche o restante dos dados de "leitura" necessários para a persistencia no BD
 			leitura.setInstante(time);
 			leitura.setRelatorio(relatorio);
 			
