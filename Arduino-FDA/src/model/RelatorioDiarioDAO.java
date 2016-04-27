@@ -25,16 +25,17 @@ public class RelatorioDiarioDAO {
 	public RelatorioDiario getById(int id) {
 
 		return manager.find(RelatorioDiario.class, id);
+
 	}
 
-	public Vector listarDatas() {
+	public Vector<String> listarDatas() {
 		
-		Query query = manager.createQuery("select data from relatoriodiario");
+		Query query = manager.createQuery("from RelatorioDiario");
 		List<RelatorioDiario> lista =  query.getResultList();
 		Vector<String> vectorDatas = new Vector<String>();
 
 		for (RelatorioDiario relatorio : lista) {
-			vectorDatas.addElement(relatorio.getData());			
+			vectorDatas.add(relatorio.getData());			
 		}
 
 		return vectorDatas;

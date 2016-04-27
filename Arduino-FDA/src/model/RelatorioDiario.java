@@ -13,7 +13,7 @@ public class RelatorioDiario {
 	@Id
 	@GeneratedValue
 	private int id;
-	private Date data;
+	private String data;
 	private int mortalidade;
 	
 	public int getId() {
@@ -22,10 +22,10 @@ public class RelatorioDiario {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date string) {
+	public void setData(String string) {
 		this.data = string;
 	}
 	public int getMortalidade() {
