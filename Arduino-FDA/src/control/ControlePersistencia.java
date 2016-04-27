@@ -27,7 +27,7 @@ public class ControlePersistencia implements Observer {
 		this.tela = tela;
 		this.leituraDAO = new LeituraSensoresDAO();
 		this.relatorioDAO = new RelatorioDiarioDAO();
-		this.arduinoDAO = new ArduinoDAO("COM7", 9600);
+		this.arduinoDAO = new ArduinoDAO("COM3", 9600);
 		this.arduinoDAO.addObserver(this);
 	}
 	

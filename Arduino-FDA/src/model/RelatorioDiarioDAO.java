@@ -46,6 +46,20 @@ public class RelatorioDiarioDAO {
 		
 		return lista;
 	}
+	
+	public Vector<RelatorioDiario> listarRelatorioDiarioVector() {
+		
+		Query query = manager.createQuery("from RelatorioDiario");
+		List<RelatorioDiario> lista =  query.getResultList();
+		
+		Vector<RelatorioDiario> vectoRelatorio = new Vector<RelatorioDiario>();
+		for (RelatorioDiario relatorioDiario : lista) {
+			
+			vectoRelatorio.addElement(relatorioDiario);
+		}
+		
+		return vectoRelatorio;
+	}
 
 	public void finalizar(){
 

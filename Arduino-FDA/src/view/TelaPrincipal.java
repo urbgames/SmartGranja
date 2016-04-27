@@ -72,6 +72,7 @@ public class TelaPrincipal extends JFrame {
 		add(tfDelay);
 		add(jbModificarDalay);
 
+		//Inserir um relatorio (apenas para testes)
 		gerarRelarioDiario();
 
 		jbIniciarSensoriamento.addActionListener(new ActionListener() {
@@ -81,7 +82,6 @@ public class TelaPrincipal extends JFrame {
 
 				controlePersistencia = new ControlePersistencia(TelaPrincipal.this);
 
-
 			}
 		});
 
@@ -89,7 +89,7 @@ public class TelaPrincipal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
 				new TelaMortalidade().setVisible(true);
 
 			}
@@ -101,7 +101,8 @@ public class TelaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				int delayEmSegundos = Integer.parseInt(tfDelay.getText());
-				delayEmSegundos = delayEmSegundos*60;
+				//Delay esta em segundos (mudar para minutos depois)
+//				delayEmSegundos = delayEmSegundos*60;
 				controlePersistencia.setDelay(delayEmSegundos);
 			}
 		});
