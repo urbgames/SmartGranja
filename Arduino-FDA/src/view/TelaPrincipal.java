@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -71,6 +72,7 @@ public class TelaPrincipal extends JFrame {
 		add(tfDelay);
 		add(jbModificarDalay);
 
+		gerarRelarioDiario();
 
 		jbIniciarSensoriamento.addActionListener(new ActionListener() {
 
@@ -88,12 +90,6 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				//Inserir um relatorio da BD apenas p/ testar as inserções da LeituraSensores
-				/*RelatorioDiario relatorio = new RelatorioDiario();
-				RelatorioDiarioDAO relDAO = new RelatorioDiarioDAO();
-				relatorio.setData("10/10");
-				relatorio.setMortalidade(12);
-				relDAO.inserirRelatorio(relatorio);*/
 				new TelaMortalidade().setVisible(true);
 
 			}
@@ -110,6 +106,16 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 
+	}
+
+	private void gerarRelarioDiario() {
+		
+		//Inserir um relatorio da BD apenas p/ testar as inserções da LeituraSensores
+		RelatorioDiario relatorio = new RelatorioDiario();
+		RelatorioDiarioDAO relDAO = new RelatorioDiarioDAO();
+		relatorio.setData(new Date());
+		relDAO.inserirRelatorio(relatorio);
+		
 	}
 
 	public void atualizarResultados(LeituraSensores leitura) {

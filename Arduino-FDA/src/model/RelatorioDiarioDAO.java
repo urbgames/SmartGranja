@@ -1,6 +1,9 @@
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.persistence.EntityManager;
@@ -14,6 +17,14 @@ public class RelatorioDiarioDAO {
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("sensoriamento");
 	EntityManager manager = factory.createEntityManager();
 
+	public void atualizarRelatorio(RelatorioDiario relatorio){
+		
+		manager.getTransaction().begin();
+		RelatorioDiario relatorioDiario = manager.find(RelatorioDiario.class, relatorio.getId());
+		relatorioDiario.setMortalidade(relatorio.getMortalidade());
+		manager.getTransaction().commit();
+		
+	}
 
 	public void inserirRelatorio(RelatorioDiario relatorio) {
 
@@ -28,17 +39,12 @@ public class RelatorioDiarioDAO {
 
 	}
 
-	public Vector<String> listarDatas() {
+	public List<RelatorioDiario> listarRelatorioDiario() {
 		
 		Query query = manager.createQuery("from RelatorioDiario");
 		List<RelatorioDiario> lista =  query.getResultList();
-		Vector<String> vectorDatas = new Vector<String>();
-
-		for (RelatorioDiario relatorio : lista) {
-			vectorDatas.add(relatorio.getData());			
-		}
-
-		return vectorDatas;
+		
+		return lista;
 	}
 
 	public void finalizar(){

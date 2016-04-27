@@ -30,6 +30,11 @@ public class ControlePersistencia implements Observer {
 		this.arduinoDAO = new ArduinoDAO("COM7", 9600);
 		this.arduinoDAO.addObserver(this);
 	}
+	
+	public void atualizarDados(){
+		
+	}
+	
 	public void persistirDados(String inputLine) {
 				
 		quantidade++;
