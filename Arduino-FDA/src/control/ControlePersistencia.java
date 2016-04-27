@@ -20,15 +20,16 @@ public class ControlePersistencia implements Observer {
 	private RelatorioDiarioDAO relatorioDAO; 
 	private TelaPrincipal tela;
 	private ArduinoDAO arduinoDAO;
+	private LeituraSensores leitura;
 	
 	public ControlePersistencia(TelaPrincipal tela) {
 		
+		this.tela = tela;
+		this.leitura = new LeituraSensores();
 		this.leituraDAO = new LeituraSensoresDAO();
 		this.relatorioDAO = new RelatorioDiarioDAO();
-		this.tela = tela;
 		this.arduinoDAO = new ArduinoDAO("COM3", 9600);
 		this.arduinoDAO.addObserver(this);
-		
 	}
 	
 	public void persistirDados(String inputLine) {
@@ -37,22 +38,19 @@ public class ControlePersistencia implements Observer {
 		System.out.println(quantidade);
 		String [] entradas = inputLine.split("/");
 		
+		leitura.setUmidade(Float.parseFloat(entradas[0]));
+		leitura.setTemperatura(Float.parseFloat(entradas[1]));
+		leitura.setLuminosidade(Float.parseFloat(entradas[2]));
+		//Mostra os resultados na tela
+		tela.atualizarResultados(leitura);
 		
 		if(quantidade >= delay) {
 			
-			LeituraSensores leitura = new LeituraSensores();
+			//Preenche o restante dos dados de "leitura" necessários para a persistencia no BD
 			RelatorioDiario relatorio = relatorioDAO.getById(1);
-			
 			Date time = new Date(System.currentTimeMillis());
-			
-			leitura.setUmidade(Float.parseFloat(entradas[0]));
-			leitura.setTemperatura(Float.parseFloat(entradas[1]));
-			leitura.setLuminosidade(Float.parseFloat(entradas[2]));
 			leitura.setInstante(time);
 			leitura.setRelatorio(relatorio);
-		
-			//Mostra os resultados na tela
-			tela.atualizarResultados(leitura);
 			
 			leituraDAO.inserirLeitura(leitura);
 			quantidade = 0;
@@ -60,9 +58,8 @@ public class ControlePersistencia implements Observer {
 			System.out.print("Umidade: " + entradas[0] + "\t");
 			System.out.print("Temperatura: " + entradas[1] + "\t");
 			System.out.println("Luminosidade: " + entradas[2]);
-		}
 			
-		
+		}
 	}
 	
 	public void update(Observable arg0, Object arg1) {
