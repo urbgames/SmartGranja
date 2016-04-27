@@ -1,6 +1,7 @@
 package model;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ public class RelatorioDiario {
 	@Id
 	@GeneratedValue
 	private int id;
-	private String data;
+	private Date data;
 	private int mortalidade;
 	
 	public int getId() {
@@ -21,10 +22,10 @@ public class RelatorioDiario {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(String string) {
+	public void setData(Date string) {
 		this.data = string;
 	}
 	public int getMortalidade() {
