@@ -28,7 +28,7 @@ public class TelaMortalidade extends JFrame {
 		setLayout(new FlowLayout(0, 10, 10));
 		setLocationRelativeTo(null);
 		setSize(400, 200);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		relatorioDAO = new RelatorioDiarioDAO();
 		
 		lbData = new JLabel("Data da mortalidade");
@@ -46,8 +46,8 @@ public class TelaMortalidade extends JFrame {
 		
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		new TelaMortalidade().setVisible(true);
-	}
+	}*/
 
 }
